@@ -15,6 +15,16 @@ void OnOffController::calcurate(const int& brightness, int& leftPwm,
 void OnOffController::setParam(const int& threthold_, const int& forward_,
                                const int& turn_) {
   threthold = threthold_;
-  forward = forward_;
-  turn = turn_;
+  forward = limitPwm(forward_);
+  turn = limitPwm(turn_);
+}
+
+int OnOffController::limitPwm(const int& power) {
+  if (power > 100) {
+    return 100;
+  } else if (power < -100) {
+    return -100;
+  }
+
+  return power;
 }

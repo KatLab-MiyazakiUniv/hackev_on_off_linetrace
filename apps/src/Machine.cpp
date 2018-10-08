@@ -15,23 +15,7 @@ void Machine::calibration() {
   controller.speakerPlayTone(controller.noteFs6, 100);
 
   // forward値、turn値の設定
-  setLineTracePwm(30, 10);
-  onOffController.setParam((black + white) / 2, forward, turn);
-}
-
-void Machine::setLineTracePwm(const int& forward_, const int& turn_) {
-  forward = limitPwm(forward_);
-  turn = limitPwm(turn_);
-}
-
-int Machine::limitPwm(const int& power) {
-  if (power > 100) {
-    return 100;
-  } else if (power < -100) {
-    return -100;
-  }
-
-  return power;
+  onOffController.setParam((black + white) / 2, 30, 10);
 }
 
 void Machine::run() {
