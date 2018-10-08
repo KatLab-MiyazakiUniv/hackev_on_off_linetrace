@@ -18,13 +18,3 @@ void OnOffController::setParam(const int& threthold_, const int& forward_,
   forward = limitPwm(forward_);
   turn = limitPwm(turn_);
 }
-
-int OnOffController::limitPwm(const int& power) {
-  if (power > 100) {
-    return 100;
-  } else if (power < -100) {
-    return -100;
-  }
-
-  return power;
-}

@@ -3,6 +3,7 @@ mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 APPL_CXXOBJS += \
 Controller.o \
 Machine.o \
+LineTracer.o \
 OnOffController.o
 
 
