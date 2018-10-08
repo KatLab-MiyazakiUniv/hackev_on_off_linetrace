@@ -8,6 +8,7 @@
 #include "ev3api.h"
 
 #include "Controller.h"
+#include "Machine.h"
 #include "app.h"
 
 #if defined(BUILD_MODULE)
@@ -29,4 +30,8 @@ void main_task(intptr_t unused) {
   Controller controller;
   controller.printDisplay(1, "hackev_on_off_linetrace");
   controller.printDisplay(2, " create from KatLab-MiyazakiUniv");
+
+  Machine machine{controller};
+  machine.calibration();
+  
 }

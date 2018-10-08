@@ -1,12 +1,13 @@
 #ifndef __CONTROLLER__
 #define __CONTROLLER__
 
+#include "ev3api.h"
+
+#include <stdarg.h>
 #include "Clock.h"
 #include "ColorSensor.h"
 #include "Motor.h"
 #include "TouchSensor.h"
-#include "ev3api.h"
-#include <stdarg.h>
 
 /*
  * touch_sensor = EV3_PORT_1;
@@ -28,14 +29,12 @@ extern void msg_f(const char* str, int32_t line);
 class Controller {
  public:
   Controller()
-    : touchSensor(PORT_1),
-      colorSensor(PORT_3),
-      liftMotor(PORT_A),
-      rightWheel(PORT_B),
-      leftWheel(PORT_C),
-      tailMotor(PORT_D)
-  {
-  }
+      : touchSensor(PORT_1),
+        colorSensor(PORT_3),
+        liftMotor(PORT_A),
+        rightWheel(PORT_B),
+        leftWheel(PORT_C),
+        tailMotor(PORT_D) {}
   uint16_t noteFs6 = NOTE_FS6;
   uint16_t noteFs4 = NOTE_FS4;
   TouchSensor touchSensor;
