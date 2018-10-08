@@ -16,6 +16,7 @@ void Machine::calibration() {
 
   // forward値、turn値の設定
   setLineTracePwm(30, 10);
+  onOffController.setParam((black + white) / 2, forward, turn);
 }
 
 void Machine::setLineTracePwm(const int& forward_, const int& turn_) {
@@ -42,8 +43,25 @@ void Machine::run() {
     controller.tslpTsk(4);
   }
 
-  controller.leftWheel.setPWM(100);
-  controller.rightWheel.setPWM(100);
+  controller.speakerPlayTone(controller.noteFs6, 100);
+
+  int leftPwm = 0;
+  int rightPwm = 0;
+  while (1) {
+    if (controller.buttonIsPressedBack() == true) {
+      controller.tslpTsk(500); /* 500msecウェイト */
+      controller.leftWheel.setPWM(0);
+      controller.rightWheel.setPWM(0);
+      break;
+    }
+
+    auto brightness = controller.getBrightness();
+    onOffController.calcurate(brightness, leftPwm, rightPwm);
+    controller.leftWheel.setPWM(leftPwm);
+    controller.rightWheel.setPWM(rightPwm);
+
+    controller.tslpTsk(4);
+  }
 }
 
 int Machine::setBrightness() {

@@ -2,7 +2,8 @@ mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
 APPL_CXXOBJS += \
 Controller.o \
-Machine.o
+Machine.o \
+OnOffController.o
 
 
 ifeq ($(side),right)

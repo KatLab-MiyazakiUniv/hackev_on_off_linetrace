@@ -2,6 +2,7 @@
 #define __MACHINE__
 
 #include "Controller.h"
+#include "OnOffController.h"
 
 class Machine {
  public:
@@ -26,7 +27,8 @@ class Machine {
   int limitPwm(const int& power); // PWMの制限をする
 
   Controller controller;
-  int black; // 黒のBrightness
+  OnOffController onOffController;
+  int black;  // 黒のBrightness
   int white; // 白のBrightness
   int forward; // 前進値
   int turn; // 回転値
