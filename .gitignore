@@ -30,5 +30,9 @@
 *.exe
 *.out
 *.app
+
+# User
 app
+appbak.cpp
+
 
