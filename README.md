@@ -15,3 +15,6 @@ An executable file named "app" is created.
 ls
 LICENSE      Makefile.inc README.md    app          app.cfg      app.cpp      app.h      apps
 ```
+
+## Class Diagram
+![クラス図](./class_diagram.png "クラス図")
