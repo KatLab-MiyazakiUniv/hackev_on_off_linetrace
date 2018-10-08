@@ -13,6 +13,37 @@ void Machine::calibration() {
   controller.printDisplay(4, "Set white brightness");
   white = setBrightness();
   controller.speakerPlayTone(controller.noteFs6, 100);
+
+  // forward値、turn値の設定
+  setLineTracePwm(30, 10);
+}
+
+void Machine::setLineTracePwm(const int& forward_, const int& turn_) {
+  forward = limitPwm(forward_);
+  turn = limitPwm(turn_);
+}
+
+int Machine::limitPwm(const int& power) {
+  if (power > 100) {
+    return 100;
+  } else if (power < -100) {
+    return -100;
+  }
+
+  return power;
+}
+
+void Machine::run() {
+  while (1) {
+    if (controller.buttonIsPressedEnter() == true) {
+      controller.tslpTsk(500); /* 500msecウェイト */
+      break;
+    }
+    controller.tslpTsk(4);
+  }
+
+  controller.leftWheel.setPWM(100);
+  controller.rightWheel.setPWM(100);
 }
 
 int Machine::setBrightness() {

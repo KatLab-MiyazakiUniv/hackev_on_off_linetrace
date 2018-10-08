@@ -31,7 +31,15 @@ void main_task(intptr_t unused) {
   controller.printDisplay(1, "hackev_on_off_linetrace");
   controller.printDisplay(2, " create from KatLab-MiyazakiUniv");
 
+  // キャリブレーション開始
+  controller.ledSetColorOrange();
   Machine machine{controller};
   machine.calibration();
-  
+
+  // 待ち時間
+  controller.tslpTsk(100);
+  controller.ledSetColorGreen();
+
+  // 走行
+  machine.run();
 }
