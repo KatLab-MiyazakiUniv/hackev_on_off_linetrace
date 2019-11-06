@@ -9,6 +9,12 @@ In the workspace, type the following command.
 docker run --rm -it -v $PWD:/home/hrp2/sdk/workspace/product korosuke613/etrobo-docker
 ```
 
+or
+
+```
+./make_docker.sh
+```
+
 An executable file named "app" is created.
 
 ```
