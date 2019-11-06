@@ -17,4 +17,9 @@ void OnOffController::setParam(const int& threthold_, const int& forward_,
   threthold = threthold_;
   forward = limitPwm(forward_);
   turn = limitPwm(turn_);
+  if(isLeft == false){
+    turn = -turn;
+  }
 }
+
+void OnOffController::setIsLeft(bool isLeft_) { isLeft = isLeft_; }

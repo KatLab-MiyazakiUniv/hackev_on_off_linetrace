@@ -4,6 +4,11 @@ void Machine::calibration() {
   // スピーカ音量設定
   controller.speakerSetVolume(100);
 
+  // LRコースの選択
+  controller.printDisplay(4, "Choose L or R course");
+  setLR();
+  onOffController.setIsLeft(isLeft);
+
   // 黒色の光設定
   controller.printDisplay(4, "Set black brightness");
   black = setBrightness();
@@ -15,7 +20,13 @@ void Machine::calibration() {
   controller.speakerPlayTone(controller.noteFs6, 100);
 
   // forward値、turn値の設定
-  onOffController.setParam((black + white) / 2, 30, 10);
+  if (isLeft) {
+    // Lコースの場合
+    onOffController.setParam((black + white) / 2, 30, 10);
+  } else {
+    // Rコースの場合
+    onOffController.setParam((black + white) / 2, 30, 10);
+  }
 }
 
 void Machine::run() {
@@ -45,6 +56,29 @@ void Machine::run() {
     controller.rightWheel.setPWM(rightPwm);
 
     controller.tslpTsk(4);
+  }
+}
+
+void Machine::setLR() {
+  controller.printDisplay(5, "isLeft: true");
+  while (1) {
+    if ((controller.buttonIsPressedRight() == true) ||
+        (controller.buttonIsPressedLeft() == true)) {
+      controller.speakerPlayTone(controller.noteFs6, 100);
+      if (isLeft) {
+        isLeft = false;
+        controller.printDisplay(5, "isLeft: false");
+      } else {
+        isLeft = true;
+        controller.printDisplay(5, "isLeft: true");
+      }
+      controller.tslpTsk(500); /* 500msecウェイト */
+    } else if (controller.buttonIsPressedEnter() == true) {
+      controller.speakerPlayTone(controller.noteFs6, 100);
+      controller.tslpTsk(500); /* 500msecウェイト */
+      return;
+    }
+    controller.tslpTsk(4); /* 4msecウェイト */
   }
 }
 
